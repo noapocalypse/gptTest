@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
   title: Maltiverse API
   description: Provides access to the Maltiverse threat intelligence platform for enriching and analyzing indicators of compromise (IoCs).
