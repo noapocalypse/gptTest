@@ -1,0 +1,219 @@
+openapi: 3.1.0
+info:
+  title: Maltiverse API
+  description: Provides access to the Maltiverse threat intelligence platform for enriching and analyzing indicators of compromise (IoCs).
+  version: 1.0.0
+servers:
+  - url: https://api.maltiverse.com
+    description: Maltiverse production server
+paths:
+  /ip/{ip}:
+    get:
+      operationId: getIpDetails
+      summary: Retrieve details about an IP address
+      description: Fetches threat intelligence details for a given IP address.
+      parameters:
+        - name: ip
+          in: path
+          required: true
+          description: The IP address to query.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: API key for authentication.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: IP address details successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ip:
+                    type: string
+                  threat_score:
+                    type: number
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                  malware_samples:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        sha256:
+                          type: string
+                        first_seen:
+                          type: string
+                        last_seen:
+                          type: string
+  /domain/{domain}:
+    get:
+      operationId: getDomainDetails
+      summary: Retrieve details about a domain
+      description: Fetches threat intelligence details for a given domain.
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          description: The domain to query.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: API key for authentication.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Domain details successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  threat_score:
+                    type: number
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                  malware_samples:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        sha256:
+                          type: string
+                        first_seen:
+                          type: string
+                        last_seen:
+                          type: string
+  /url/{url}:
+    get:
+      operationId: getUrlDetails
+      summary: Retrieve details about a URL
+      description: Fetches threat intelligence details for a given URL.
+      parameters:
+        - name: url
+          in: path
+          required: true
+          description: The URL to query.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: API key for authentication.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: URL details successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                  threat_score:
+                    type: number
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                  malware_samples:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        sha256:
+                          type: string
+                        first_seen:
+                          type: string
+                        last_seen:
+                          type: string
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      name: apiKey
+      in: query
+  schemas:
+    IPDetails:
+      type: object
+      properties:
+        ip:
+          type: string
+        threat_score:
+          type: number
+        tags:
+          type: array
+          items:
+            type: string
+        malware_samples:
+          type: array
+          items:
+            type: object
+            properties:
+              sha256:
+                type: string
+              first_seen:
+                type: string
+              last_seen:
+                type: string
+    DomainDetails:
+      type: object
+      properties:
+        domain:
+          type: string
+        threat_score:
+          type: number
+        tags:
+          type: array
+          items:
+            type: string
+        malware_samples:
+          type: array
+          items:
+            type: object
+            properties:
+              sha256:
+                type: string
+              first_seen:
+                type: string
+              last_seen:
+                type: string
+    URLDetails:
+      type: object
+      properties:
+        url:
+          type: string
+        threat_score:
+          type: number
+        tags:
+          type: array
+          items:
+            type: string
+        malware_samples:
+          type: array
+          items:
+            type: object
+            properties:
+              sha256:
+                type: string
+              first_seen:
+                type: string
+              last_seen:
+                type: string
+security:
+  - apiKeyAuth: []
